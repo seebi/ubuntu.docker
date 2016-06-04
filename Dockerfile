@@ -1,15 +1,17 @@
 # Seebis Base Ubuntu Dockerfile
 #
 # https://github.com/seebi/ubuntu.docker
-#
-# VERSION       0.1
 
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 MAINTAINER Sebastian Tramp, mail@sebastian.tramp.name
+
+ENV ECC_IMAGE_PREFIX seebi
+ENV ECC_IMAGE_NAME ubuntu
+
+ENV DEBIAN_FRONTEND noninteractive
 
 # Install packages
 RUN \
-  sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list && \
   apt-get update && \
   apt-get -y upgrade && \
   apt-get install -y build-essential && \
@@ -23,7 +25,7 @@ RUN \
   cd /root/.config/zsh && \
   make install && \
   chsh -s /usr/bin/zsh root && \
-  ln -s /root/.config/zsh/zshrc /root/.zshrc && \
+  rm -f /root/.zshrc && ln -s /root/.config/zsh/zshrc /root/.zshrc && \
   echo "RUN DONE"
 
 # Set environment variables.
@@ -34,4 +36,6 @@ WORKDIR /root
 
 # Define default command.
 CMD ["byobu"]
+
+EXPOSE 80
 
