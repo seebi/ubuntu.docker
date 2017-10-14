@@ -2,11 +2,7 @@
 #
 # https://github.com/seebi/ubuntu.docker
 
-FROM ubuntu:16.04
-MAINTAINER Sebastian Tramp, mail@sebastian.tramp.name
-
-ENV ECC_IMAGE_PREFIX seebi
-ENV ECC_IMAGE_NAME ubuntu
+FROM ubuntu:17.04
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -14,7 +10,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN \
   apt-get update && \
   apt-get -y upgrade && \
-  apt-get install -y build-essential && \
+  apt-get install -y build-essential devscripts debhelper && \
   apt-get install -y software-properties-common && \
   apt-get install -y byobu curl git htop man unzip vim wget make zsh exuberant-ctags
 
@@ -36,6 +32,3 @@ WORKDIR /root
 
 # Define default command.
 CMD ["byobu"]
-
-EXPOSE 80
-
