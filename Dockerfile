@@ -26,7 +26,8 @@ RUN \
 
 # Set environment variables.
 ENV HOME /root
-ENV LANG en_US.UTF-8
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
 
 # Define working directory.
 WORKDIR /root
